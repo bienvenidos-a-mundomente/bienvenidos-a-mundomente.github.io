@@ -1,0 +1,8 @@
+[{
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "cl.mundomente.app",
+        "sha256_cert_fingerprints": ["10:0F:01:F6:D8:8D:3C:E8:7D:B8:9F:EE:96:03:8E:1C:98:0A:D8:C1:56:EE:A9:46:5D:74:AF:38:E7:49:DA:4B"]
+      }
+    }]
