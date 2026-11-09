@@ -1585,6 +1585,92 @@ if(DB.profiles.length&&DB.current&&DB.profiles.some(p=>p.id===DB.current))start(
 </script>
 
 <style>
+.inst{position:fixed;left:12px;right:12px;bottom:84px;z-index:190;max-width:520px;margin:0 auto;background:var(--surface,#fff);color:var(--ink,#17203D);border:2px solid var(--accent,#5929AD);border-radius:18px;padding:12px 14px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;box-shadow:0 10px 30px rgba(0,0,0,.25);font:500 .95rem/1.35 var(--f-body,system-ui)}
+.inst img{width:44px;height:44px;border-radius:12px;flex:none}
+.inst span{flex:1 1 170px}
+.inst button{min-height:44px;padding:8px 16px;border-radius:999px;border:2px solid var(--accent,#5929AD);background:var(--accent,#5929AD);color:var(--on-accent,#fff);font:600 .95rem var(--f-body,system-ui);cursor:pointer}
+.inst button.sec{background:transparent;color:var(--ink,#17203D);border-color:var(--line,#ccc)}
+.instsh{position:fixed;inset:0;z-index:210;background:rgba(8,12,30,.6);display:flex;align-items:flex-end;justify-content:center}
+.instsh>div{width:min(540px,100%);max-height:92%;overflow:auto;background:var(--bg,#F3F5FB);color:var(--ink,#17203D);border-radius:28px 28px 0 0;padding:18px 18px 28px;font:400 1rem/1.5 var(--f-body,system-ui)}
+.instsh h2{margin:0 0 8px;font:800 1.4rem/1.2 var(--f-display,system-ui);color:var(--accent,#5929AD)}
+.instsh ol{padding-left:1.3em;margin:.6em 0}
+.instsh li{margin:.55em 0}
+.instsh .ico{display:inline-block;vertical-align:middle;width:1.4em;height:1.4em;border:2px solid currentColor;border-radius:.3em;position:relative;margin:0 .15em}
+.instsh a.dl{display:block;margin:.8em 0;padding:12px 16px;border-radius:999px;text-align:center;text-decoration:none;font-weight:600;border:2px solid var(--accent,#5929AD);color:var(--ink,#17203D)}
+.instsh .cerrar{margin-top:12px;min-height:46px;width:100%;border-radius:999px;border:2px solid var(--accent,#5929AD);background:var(--accent,#5929AD);color:var(--on-accent,#fff);font:600 1rem var(--f-body,system-ui);cursor:pointer}
+.instsh small{color:var(--muted,#566080);display:block;margin-top:.5em}
+</style>
+<script>
+/* Aviso para instalar Mundo Mente como aplicación (Android con un toque; iPhone con pasos) */
+(function(){
+  if(location.protocol==='file:')return;
+  var K='mm_inst_off';
+  function guardar(v){try{localStorage.setItem(K,v);}catch(e){}}
+  function leer(){try{return +localStorage.getItem(K)||0;}catch(e){return 0;}}
+  var instalada=(window.matchMedia&&matchMedia('(display-mode: standalone)').matches)||window.navigator.standalone===true||document.referrer.indexOf('android-app://')===0;
+  if(instalada)return;
+  var ua=navigator.userAgent||'';
+  var ios=/iphone|ipad|ipod/i.test(ua)||(/macintosh/i.test(ua)&&navigator.maxTouchPoints>1);
+  var android=/android/i.test(ua);
+  var movil=ios||android;
+  var evt=null;
+  function quitar(){var b=document.getElementById('inst');if(b)b.remove();}
+  function mas(dias){guardar(String(Date.now()+dias*864e5));}
+  function el(t,p,x){var e=document.createElement(t);if(p)for(var k in p)e.setAttribute(k,p[k]);if(x!=null)e.textContent=x;return e;}
+  function pasos(){
+    if(document.getElementById('instsh'))return;
+    var fondo=el('div',{id:'instsh','class':'instsh',role:'dialog','aria-modal':'true','aria-label':'Cómo instalar'});
+    var c=el('div');
+    var ol=el('ol');
+    function li(){var l=el('li');for(var i=0;i<arguments.length;i++){var a=arguments[i];l.appendChild(typeof a==='string'?document.createTextNode(a):a);}ol.appendChild(l);}
+    function b(t){return el('b',null,t);}
+    if(ios){
+      c.appendChild(el('h2',null,'Instalar en iPhone o iPad'));
+      li('Abre este enlace en ',b('Safari'),'.');
+      li('Toca el botón ',b('Compartir'),' (un cuadrado con una flecha hacia arriba), en la barra de abajo o arriba.');
+      li('Baja y toca ',b('Agregar a pantalla de inicio'),'.');
+      li('Toca ',b('Agregar'),'. Mundo Mente aparece con su ícono, como cualquier app.');
+      c.appendChild(ol);
+      c.appendChild(el('small',null,'Apple no permite un botón de instalar directo. Estos pasos se hacen una sola vez.'));
+    }else{
+      c.appendChild(el('h2',null,'Instalar en Android'));
+      li('Abre este enlace en ',b('Chrome'),'.');
+      li('Toca los ',b('tres puntos ⋮'),' arriba a la derecha.');
+      li('Toca ',b('Instalar aplicación'),' (o ',b('Agregar a la pantalla de inicio'),').');
+      li('Toca ',b('Instalar'),'. Mundo Mente aparece con su ícono.');
+      c.appendChild(ol);
+      var a=el('a',{'class':'dl',href:'Mundo-Mente.apk',download:'Mundo-Mente.apk'},'¿No aparece? Descargar la app (archivo APK)');
+      c.appendChild(a);
+      c.appendChild(el('small',null,'Con el archivo APK, Android pedirá permiso para instalar desde el navegador y puede mostrar un aviso de seguridad. Elige "Instalar de todos modos".'));
+    }
+    var x=el('button',{type:'button','class':'cerrar'},'Entendido');
+    x.onclick=function(){fondo.remove();};
+    fondo.onclick=function(e){if(e.target===fondo)fondo.remove();};
+    c.appendChild(x);fondo.appendChild(c);document.body.appendChild(fondo);x.focus();
+  }
+  function mostrar(){
+    if(document.getElementById('inst'))return;
+    if(Date.now()<leer())return;
+    if(!evt&&!movil)return;                     /* en computador solo si el navegador ofrece instalar */
+    var d=el('div',{id:'inst','class':'inst',role:'region','aria-label':'Instalar la aplicación'});
+    var img=el('img',{src:'icons/icon-192.png',alt:'','aria-hidden':'true'});
+    var t=el('span',null,'Instala Mundo Mente como app: se abre con su ícono y funciona sin internet.');
+    var si=el('button',{type:'button'},'Instalar');
+    var no=el('button',{type:'button','class':'sec'},'Ahora no');
+    si.onclick=function(){
+      if(evt&&!ios){var ev=evt;evt=null;quitar();ev.prompt();ev.userChoice.then(function(r){mas(r&&r.outcome==='accepted'?365:3);});}
+      else pasos();
+    };
+    no.onclick=function(){mas(7);quitar();};
+    d.appendChild(img);d.appendChild(t);d.appendChild(si);d.appendChild(no);document.body.appendChild(d);
+  }
+  window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();evt=e;setTimeout(mostrar,300);});
+  window.addEventListener('appinstalled',function(){mas(365);quitar();});
+  window.addEventListener('load',function(){setTimeout(mostrar,2500);});
+})();
+</script>
+
+<style>
 .upd{position:fixed;left:12px;right:12px;bottom:84px;z-index:200;max-width:520px;margin:0 auto;background:var(--surface,#fff);color:var(--ink,#17203D);border:2px solid var(--accent,#5929AD);border-radius:18px;padding:12px 14px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;box-shadow:0 10px 30px rgba(0,0,0,.25);font:500 .95rem/1.35 var(--f-body,system-ui)}
 .upd span{flex:1 1 200px}
 .upd button{min-height:44px;padding:8px 16px;border-radius:999px;border:2px solid var(--accent,#5929AD);background:var(--accent,#5929AD);color:var(--on-accent,#fff);font:600 .95rem var(--f-body,system-ui);cursor:pointer}

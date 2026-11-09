@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#5929AD">
+<title>Instalar Mundo Mente</title>
+<link rel="icon" type="image/png" href="icons/favicon-32.png">
+<style>
+:root{color-scheme:light dark;--bg:#F3F5FB;--fg:#17203D;--mut:#566080;--ac:#5929AD;--sf:#fff;--ln:#D3D9EE}
+@media(prefers-color-scheme:dark){:root{--bg:#0D1226;--fg:#EEF1FF;--mut:#A9B2D6;--ac:#B79CF2;--sf:#182041;--ln:#2C3764}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:400 1.05rem/1.6 system-ui,Segoe UI,Roboto,sans-serif}
+main{max-width:40rem;margin:0 auto;padding:1.2rem 1rem 3rem}
+.logo{display:flex;align-items:center;gap:.8rem}
+.logo img{width:64px;height:64px;border-radius:16px}
+h1{font-size:1.7rem;line-height:1.15;margin:0;color:var(--ac)}
+h2{font-size:1.2rem;margin:0 0 .4rem}
+.card{background:var(--sf);border:2px solid var(--ln);border-radius:20px;padding:1rem 1.1rem;margin:1rem 0}
+.card.me{border-color:var(--ac)}
+ol{padding-left:1.3em;margin:.4em 0}li{margin:.5em 0}
+.btn{display:block;text-align:center;text-decoration:none;font-weight:600;padding:.8rem 1rem;border-radius:999px;border:2px solid var(--ac);background:var(--ac);color:#fff;margin:.7rem 0}
+.btn.sec{background:transparent;color:var(--fg)}
+.mut{color:var(--mut);font-size:.92rem}
+</style>
+</head>
+<body>
+<main>
+<div class="logo"><img src="icons/icon-192.png" alt=""><div><h1>Instalar Mundo Mente</h1><div class="mut">Se abre con su ícono y funciona sin internet</div></div></div>
+
+<a class="btn" href="./">Abrir el juego</a>
+
+<section class="card" id="android">
+<h2>Android</h2>
+<ol>
+<li>Abre <b>https://bienvenidos-a-mundomente.github.io/</b> en <b>Chrome</b>.</li>
+<li>Toca <b>Instalar</b> en el aviso que aparece. Si no aparece: toca los <b>tres puntos ⋮</b> y luego <b>Instalar aplicación</b>.</li>
+<li>Toca <b>Instalar</b>.</li>
+</ol>
+<a class="btn sec" href="Mundo-Mente.apk" download>Descargar la app (archivo APK)</a>
+<p class="mut">Con el APK, Android pedirá permiso para instalar desde el navegador y puede mostrar un aviso de seguridad. Elige “Instalar de todos modos”.</p>
+</section>
+
+<section class="card" id="iphone">
+<h2>iPhone y iPad</h2>
+<ol>
+<li>Abre <b>https://bienvenidos-a-mundomente.github.io/</b> en <b>Safari</b>.</li>
+<li>Toca el botón <b>Compartir</b> (un cuadrado con una flecha hacia arriba).</li>
+<li>Baja y toca <b>Agregar a pantalla de inicio</b>.</li>
+<li>Toca <b>Agregar</b>.</li>
+</ol>
+<p class="mut">Apple no permite un botón de instalar directo. Estos pasos se hacen una sola vez.</p>
+</section>
+
+<section class="card" id="compu">
+<h2>Computador</h2>
+<p>En Chrome o Edge, toca el ícono de instalar que aparece a la derecha de la barra de direcciones, o abre el menú y elige <b>Instalar Mundo Mente</b>.</p>
+</section>
+
+<p class="mut">Mundo Mente es un apoyo educativo. Gratis, sin anuncios y sin pedir datos. Creado por Pablo E.A. Lagos Soto. <a href="privacy.html">Política de privacidad</a>.</p>
+</main>
+<script>
+(function(){var u=navigator.userAgent||'';var id=/iphone|ipad|ipod/i.test(u)||(/macintosh/i.test(u)&&navigator.maxTouchPoints>1)?'iphone':/android/i.test(u)?'android':'compu';var e=document.getElementById(id);if(e){e.classList.add('me');var m=e.parentNode;m.insertBefore(e,document.querySelector('.card'));}})();
+</script>
+</body>
+</html>

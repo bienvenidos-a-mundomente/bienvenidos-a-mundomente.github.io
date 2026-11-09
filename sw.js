@@ -1,5 +1,5 @@
-/* Modo sin conexión de Mundo Mente. Versión 72905269 */
-const V = 'mundo-mente-72905269';
+/* Modo sin conexión de Mundo Mente. Versión ed4a289b */
+const V = 'mundo-mente-ed4a289b';
 const ARCHIVOS = [
   "./",
   "index.html",
@@ -10,6 +10,7 @@ const ARCHIVOS = [
   "icons/maskable-512.png",
   "icons/apple-touch-icon.png",
   "icons/favicon-32.png",
+  "instalar.html",
   "fonts/Baloo2-4a324d.woff2",
   "fonts/Lexend-45b4c6.woff2",
   "fonts/fonts.css"
