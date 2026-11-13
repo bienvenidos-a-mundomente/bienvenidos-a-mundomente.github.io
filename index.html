@@ -1677,8 +1677,15 @@ if(DB.profiles.length&&DB.current&&DB.profiles.some(p=>p.id===DB.current))start(
 (function(){
   if(!('serviceWorker' in navigator))return;
   var teniaControl=!!navigator.serviceWorker.controller,recargando=false;
+  var t0=Date.now();
+  var enNavegador=!((window.matchMedia&&matchMedia('(display-mode: standalone)').matches)||window.navigator.standalone===true);
   function aviso(w){
-    if(document.getElementById('upd'))return;
+    /* Nunca se muestra "Actualizar": la versión nueva se aplica sola.
+       Si se detecta al abrir, de inmediato; si se detecta jugando, cuando la persona salga de la app. */
+    if(Date.now()-t0<20000){w.postMessage('SKIP_WAITING');return;}
+    var f=function(){if(document.hidden){document.removeEventListener('visibilitychange',f);w.postMessage('SKIP_WAITING');}};
+    document.addEventListener('visibilitychange',f);
+    return;
     var d=document.createElement('div');d.id='upd';d.className='upd';d.setAttribute('role','status');
     var t=document.createElement('span');t.textContent='Hay una versión nueva de Mundo Mente. Tu avance se conserva.';
     var a=document.createElement('button');a.type='button';a.textContent='Actualizar ahora';
