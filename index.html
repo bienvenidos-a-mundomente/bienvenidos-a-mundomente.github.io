@@ -1639,9 +1639,6 @@ if(DB.profiles.length&&DB.current&&DB.profiles.some(p=>p.id===DB.current))start(
       li('Toca ',b('Instalar aplicación'),' (o ',b('Agregar a la pantalla de inicio'),').');
       li('Toca ',b('Instalar'),'. Mundo Mente aparece con su ícono.');
       c.appendChild(ol);
-      var a=el('a',{'class':'dl',href:'Mundo-Mente.apk',download:'Mundo-Mente.apk'},'¿No aparece? Descargar la app (archivo APK)');
-      c.appendChild(a);
-      c.appendChild(el('small',null,'Con el archivo APK, Android pedirá permiso para instalar desde el navegador y puede mostrar un aviso de seguridad. Elige "Instalar de todos modos".'));
     }
     var x=el('button',{type:'button','class':'cerrar'},'Entendido');
     x.onclick=function(){fondo.remove();};

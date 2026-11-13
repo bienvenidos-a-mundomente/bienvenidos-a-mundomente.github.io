@@ -1,5 +1,5 @@
-/* Modo sin conexión de Mundo Mente. Versión ed4a289b */
-const V = 'mundo-mente-ed4a289b';
+/* Modo sin conexión de Mundo Mente. Versión 86a757ea */
+const V = 'mundo-mente-86a757ea';
 const ARCHIVOS = [
   "./",
   "index.html",
